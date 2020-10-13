@@ -15,6 +15,10 @@ export function setInjectionMetadata(
 export class Injector {
   private resolved = new Map<Constructor, () => unknown>();
 
+  constructor(
+    private overrides = new Map<Constructor, Constructor>(),
+  ) {}
+
   public bootstrap<T>(Type: Constructor<T>): T {
     const dependencies = this.getDependencies(Type);
     this.resolve(dependencies);
@@ -68,7 +72,16 @@ export class Injector {
   }
 
   private getDependencies(Type: Constructor): Constructor[] {
-    return Reflect.getOwnMetadata("design:paramtypes", Type) || [];
+    const dependencies: Constructor[] =
+      Reflect.getOwnMetadata("design:paramtypes", Type) || [];
+
+    return dependencies.map((Dep) => {
+      if (this.overrides.has(Dep) && this.overrides.get(Dep) !== Type) {
+        return this.overrides.get(Dep)!;
+      } else {
+        return Dep;
+      }
+    });
   }
 
   private discoverDependencies(
