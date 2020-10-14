@@ -40,13 +40,13 @@ export class Injector {
 
   private resolve(Types: Constructor[]): void {
     const unresolved = new Map(
-      [...this.discoverDependencies(Types).entries()].filter(([T]) =>
+      [...this.discoverDependencies(Types)].filter(([T]) =>
         !this.resolved.has(T)
       ),
     );
 
     while (unresolved.size > 0) {
-      const nextResolvable = [...unresolved.entries()].find(([, meta]) =>
+      const nextResolvable = [...unresolved].find(([, meta]) =>
         meta.dependencies.every((dep) => this.resolved.has(dep))
       );
       if (!nextResolvable) {
