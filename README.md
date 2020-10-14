@@ -1,4 +1,4 @@
-# Deno Injector
+# Deno Dependency Injector
 Simple dependency injection for Deno TypeScript projects.
 
 This module's aims to provide you with an extremely simple API, without any bells and whistles and the 100% test coverage that comes with such a minimal feature set.
@@ -19,7 +19,7 @@ There's no need to make things more complicated than necessary.
 ### 1. Create `@Injectable()` classes
 ```ts
 // class_a.ts
-import { Injectable } from "https://deno.land/x/deno_injection/mod.ts";
+import { Injectable } from "https://deno.land/x/inject/mod.ts";
 
 @Injectable()
 export class ClassA {
@@ -32,7 +32,7 @@ export class ClassA {
 ### 2. Inject Injectable classes through constructors
 ```ts
 // class_b.ts
-import { Injectable } from "https://deno.land/x/deno_injection/mod.ts";
+import { Injectable } from "https://deno.land/x/inject/mod.ts";
 import { ClassA } from "./class_a.ts";
 
 @Injectable()
@@ -50,7 +50,7 @@ export class ClassB {
 ### 3. Create a Bootstrapped class and let the injector take care of creation
 ```ts
 // main.ts
-import { Bootstrapped, bootstrap } from "https://deno.land/x/deno_injection/mod.ts";
+import { Bootstrapped, bootstrap } from "https://deno.land/x/inject/mod.ts";
 import { ClassB } from "./class_b.ts";
 
 @Bootstrapped()
@@ -91,7 +91,7 @@ During testing, it may be useful to override certain dependencies of the class u
 This module allows you to do just that:
 
 ```ts
-import { Injectable, Bootstrappable, bootstrap } from "https://deno.land/x/deno_injection/mod.ts";
+import { Injectable, Bootstrappable, bootstrap } from "https://deno.land/x/inject/mod.ts";
 import { assertEquals } from "https://deno.land/std/test/mod.ts";
 
 @Injectable()
