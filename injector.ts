@@ -120,7 +120,7 @@ export class Injector {
       dependencies.filter((Dep) => !discovered.has(Dep)).forEach((Dep) => {
         if (!this.isInjectable(Dep)) {
           throw new TypeError(
-            `Dependency ${Dep.name} of ${Next.name} is not Injectable`,
+            `Dependency ${Dep.name} of ${Next.name} is not injectable`,
           );
         }
         undiscovered.add(Dep);
