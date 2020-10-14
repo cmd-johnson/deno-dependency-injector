@@ -1,4 +1,4 @@
-import { Reflect } from "./deps/reflect.ts";
+import { Reflect } from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
 import type { Constructor } from "./helper_types.ts";
 
 export interface InjectionMetadata {
