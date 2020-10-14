@@ -38,7 +38,14 @@ export class Injector {
         meta.dependencies.every((dep) => this.resolved.has(dep))
       );
       if (!nextResolvable) {
-        throw new Error("Dependeny cycle detected");
+        const unresolvable = [...unresolved]
+          .map(([Type, { dependencies }]) =>
+            `${Type.name} (-> ${dependencies.map((D) => D.name).join(",")})`
+          )
+          .join(", ");
+        throw new Error(
+          `Dependency cycle detected: Failed to resolve ${unresolvable}`,
+        );
       }
       const [Next, meta] = nextResolvable;
 
