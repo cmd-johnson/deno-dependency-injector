@@ -12,6 +12,13 @@ export function setInjectionMetadata(
   Reflect.defineMetadata("di:metadata", metadata, Type);
 }
 
+export function bootstrap<T>(
+  Type: Constructor<T>,
+  overrides = new Map<Constructor, Constructor>(),
+): T {
+  return new Injector(overrides).bootstrap(Type);
+}
+
 export class Injector {
   private resolved = new Map<Constructor, () => unknown>();
 
