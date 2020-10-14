@@ -1,5 +1,5 @@
 # Deno Injector
-Simple dependency injection for TypeScript projects.
+Simple dependency injection for Deno TypeScript projects.
 
 This module's aims to provide you with an extremely simple API, without any bells and whistles and the 100% test coverage that comes with such a minimal feature set.
 
