@@ -64,7 +64,7 @@ export class Main {
   }
 }
 
-const injector = bootstrap(Main);
+const main = bootstrap(Main);
 
 console.log(main.hello());
 ```
