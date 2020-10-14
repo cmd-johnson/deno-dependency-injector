@@ -20,10 +20,15 @@ export class Injector {
   ) {}
 
   public bootstrap<T>(Type: Constructor<T>): T {
-    const dependencies = this.getDependencies(Type);
-    this.resolve(dependencies);
+    if (this.isInjectable(Type)) {
+      this.resolve([Type]);
+      return this.resolved.get(Type)!() as T;
+    } else {
+      const dependencies = this.getDependencies(Type);
+      this.resolve(dependencies);
 
-    return new Type(...dependencies.map((Dep) => this.resolved.get(Dep)!()));
+      return new Type(...dependencies.map((Dep) => this.resolved.get(Dep)!()));
+    }
   }
 
   private resolve(Types: Constructor[]): void {
