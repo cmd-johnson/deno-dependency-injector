@@ -1,4 +1,4 @@
-import { Injectable, Bootstrapped, Injector } from "../mod.ts";
+import { bootstrap, Bootstrapped, Injectable } from "../mod.ts";
 
 @Injectable({ isSingleton: false })
 class Counter {
@@ -15,13 +15,10 @@ class Counter {
 
 @Bootstrapped()
 class Main {
-  constructor(
-    public counter1: Counter,
-    public counter2: Counter,
-  ) {}
+  constructor(public counter1: Counter, public counter2: Counter) {}
 }
 
-const main = new Injector().bootstrap(Main);
+const main = bootstrap(Main);
 main.counter1.increment();
 console.log(main.counter1.getCount(), main.counter2.getCount()); // "1 0"
 main.counter2.increment();
